@@ -4,6 +4,12 @@
 CREATE DATABASE IF NOT EXISTS livret_recettes; -- Crée la base seulement si elle n'existe pas déjà
 USE livret_recettes;                          
 
+DROP TABLE IF EXISTS recette_tag;
+DROP TABLE IF EXISTS recette_ingredient;
+DROP TABLE IF EXISTS recette;
+DROP TABLE IF EXISTS ingredient;
+DROP TABLE IF EXISTS tag;
+DROP TABLE IF EXISTS user;
 -- ============================================
 -- Table user
 -- Stocke les informations de connexion
@@ -67,7 +73,7 @@ CREATE TABLE recette_ingredient (
         ON DELETE CASCADE,                      -- Si la recette est supprimée, la liaison est supprimée aussi
     FOREIGN KEY (ingredient_id)                 -- Vérifie que l'ingrédient existe bien
         REFERENCES ingredient(id)
-        ON DELETE CASCADE                       -- Si l'ingrédient est supprimé, la liaison est supprimée aussi
+        ON DELETE restrict
 );
 
 -- ============================================
@@ -85,5 +91,6 @@ CREATE TABLE recette_tag (
         ON DELETE CASCADE,                      -- Si la recette est supprimée, la liaison est supprimée aussi
     FOREIGN KEY (tag_id)                        -- Vérifie que le tag existe bien
         REFERENCES tag(id)
-        ON DELETE CASCADE                       -- Si le tag est supprimé, la liaison est supprimée aussi
+        ON DELETE RESTRICT                      -- Interdit de supprimer un tag encore utilisé par une recette
 );
+
