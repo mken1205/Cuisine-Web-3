@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Recipes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="logo-wrap" onclick="goHome()">
+      <span class="logo-ghost">Ghost</span>
+      <span class="logo-recipes">Recipes</span>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" placeholder="Search 312 underground recipes…" oninput="handleSearch(this.value)">
+    </div>
+    <nav class="masthead-links">
+      <a href="#">Collections</a>
+      <a href="#">About</a>
+      <a href="#">Submit a Ghost</a>
+    </nav>
+  </div>
+  <div class="category-nav">
+    <button class="cat-btn active" onclick="setCategory('all',this)">All</button>
+    <button class="cat-btn" onclick="setCategory('street',this)">Street Food</button>
+    <button class="cat-btn" onclick="setCategory('comfort',this)">Comfort</button>
+    <button class="cat-btn" onclick="setCategory('quick',this)">Under 30 Min</button>
+    <button class="cat-btn" onclick="setCategory('slow',this)">Low &amp; Slow</button>
+    <button class="cat-btn" onclick="setCategory('vegetarian',this)">Vegetarian</button>
+    <button class="cat-btn" onclick="setCategory('soups',this)">Soups &amp; Stews</button>
+    <button class="cat-btn" onclick="setCategory('fermented',this)">Fermented</button>
+  </div>
+</header>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="homePage">
+
+  <div class="hero-strip">
+    <div class="hero-main" onclick="openRecipe('birria')">
+      <div class="hero-image"><div class="hero-image-inner">🍲</div></div>
+      <p class="hero-label">Tonight's Ghost &nbsp;·&nbsp; Comfort &nbsp;·&nbsp; Mexican</p>
+      <h1 class="hero-title"><em>Birria de Res</em> at 2am</h1>
+      <p class="hero-desc">The broth is a ghost itself — weeks in the making, pulled from bones left simmering through the small hours. This is the version that exists only in memory and in practice.</p>
+      <div class="hero-meta">
+        <span><span class="stars">★★★★★</span><span class="stars-count">4.9 (2,341)</span></span>
+        <span>4–6 hrs</span><span>Serves 6</span><span>Intermediate</span>
+      </div>
+    </div>
+    <div class="hero-sidebar">
+      <div class="hero-side-card" onclick="openRecipe('congee')">
+        <div class="side-thumb">🍚</div>
+        <div>
+          <p class="side-label">Comfort · Cantonese</p>
+          <p class="side-title">Congee for the Sick and the Sad</p>
+          <p class="side-meta"><span class="stars">★★★★★</span><span class="stars-count">4.8</span> &nbsp;·&nbsp; 2 hrs</p>
+        </div>
+      </div>
+      <div class="hero-side-card" onclick="openRecipe('elote')">
+        <div class="side-thumb">🌽</div>
+        <div>
+          <p class="side-label">Street · Mexican</p>
+          <p class="side-title">Elote en Vaso</p>
+          <p class="side-meta"><span class="stars">★★★★★</span><span class="stars-count">4.7</span> &nbsp;·&nbsp; 15 min</p>
+        </div>
+      </div>
+      <div class="hero-side-card" onclick="openRecipe('banh-mi')">
+        <div class="side-thumb">🥖</div>
+        <div>
+          <p class="side-label">Street · Vietnamese</p>
+          <p class="side-title">Bánh Mì at the Cart on Fifth</p>
+          <p class="side-meta"><span class="stars">★★★★☆</span><span class="stars-count">4.6</span> &nbsp;·&nbsp; 30 min</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2 class="section-title">Hauntingly Good This Week</h2><a class="section-link">See all →</a></div>
+  <div class="card-grid" id="mainGrid">
+
+    <div class="recipe-card" onclick="openRecipe('elote')" data-cat="street quick">
+      <div class="card-thumb"><div class="card-thumb-inner">🌽</div></div>
+      <p class="card-label">Street · Mexican</p>
+      <h3 class="card-title">Elote en Vaso</h3>
+      <p class="card-desc">The kind you eat standing up. No table required, no forks allowed.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 15 min &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.7</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+
+    <div class="recipe-card" onclick="openRecipe('congee')" data-cat="comfort slow soups">
+      <div class="card-thumb"><div class="card-thumb-inner">🍚</div></div>
+      <p class="card-label">Comfort · Cantonese</p>
+      <h3 class="card-title">Congee for the Sick and the Sad</h3>
+      <p class="card-desc">A bowl that heals before you taste it. Made slow, eaten slower.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 2 hrs &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.8</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+
+    <div class="recipe-card" onclick="openRecipe('banh-mi')" data-cat="street quick">
+      <div class="card-thumb"><div class="card-thumb-inner">🥖</div></div>
+      <p class="card-label">Street · Vietnamese</p>
+      <h3 class="card-title">Bánh Mì at the Cart on Fifth</h3>
+      <p class="card-desc">The cart is gone now. The recipe remains. A ghost in the truest sense.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 30 min &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★☆</span> 4.6</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+
+    <div class="recipe-card" onclick="openRecipe('mac')" data-cat="comfort">
+      <div class="card-thumb"><div class="card-thumb-inner">🧀</div></div>
+      <p class="card-label">Comfort · Southern</p>
+      <h3 class="card-title">Baked Mac &amp; The Family Secret</h3>
+      <p class="card-desc">Every family has one. This is ours. Written down for the first time.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 1 hr &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.9</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head"><h2 class="section-title">Quick Street Hauls</h2><a class="section-link">See all →</a></div>
+  <div class="h-list">
+    <div class="h-list-inner">
+      <div class="h-card" onclick="openRecipe('elote')">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🌽</div></div>
+        <p class="h-card-label">Mexican</p><p class="h-card-title">Elote en Vaso</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★★</span> 4.7 · 15 min</p>
+      </div>
+      <div class="h-card" onclick="openRecipe('banh-mi')">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🥖</div></div>
+        <p class="h-card-label">Vietnamese</p><p class="h-card-title">Bánh Mì at the Cart on Fifth</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★☆</span> 4.6 · 30 min</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🧆</div></div>
+        <p class="h-card-label">Middle Eastern</p><p class="h-card-title">Falafel From the Fryer at Midnight</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★★</span> 4.8 · 25 min</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🥟</div></div>
+        <p class="h-card-label">Shanghainese</p><p class="h-card-title">Soup Dumplings, No Bamboo Steamer</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★☆</span> 4.5 · 45 min</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🌮</div></div>
+        <p class="h-card-label">Oaxacan</p><p class="h-card-title">Tlayudas After the Market Closes</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★★</span> 4.9 · 20 min</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-thumb"><div class="h-card-thumb-inner">🍢</div></div>
+        <p class="h-card-label">Japanese</p><p class="h-card-title">Yakitori Under the Train Tracks</p>
+        <p class="h-card-time"><span class="stars" style="font-size:.5rem">★★★★★</span> 4.7 · 30 min</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="editorial-band">
+    <div>
+      <p class="ed-overline">On the Ghost Kitchen</p>
+      <h2 class="ed-title">Why the best food has no address</h2>
+      <p class="ed-body">Ghost kitchens are not a trend. They are a return to something older than dining rooms — the idea that food's purpose is nourishment and pleasure, not performance. The best meals I've eaten were from windows, carts, and hands I never saw twice.</p>
+      <a class="ed-link" href="#">Read the manifesto →</a>
+    </div>
+    <div>
+      <p class="ed-overline">This Season</p>
+      <h2 class="ed-title">Slow foods for fast lives</h2>
+      <p class="ed-body">There is a paradox in the slow-food movement: the people who most need it have the least time for it. Ghost Recipes exists to solve that — to take the long-simmered, the overnight-marinated, and make them legible for a Tuesday.</p>
+      <a class="ed-link" href="#">Browse the collection →</a>
+    </div>
+  </div>
+
+  <div class="section-head"><h2 class="section-title">Low &amp; Slow — Worth Every Hour</h2><a class="section-link">See all →</a></div>
+  <div class="card-grid">
+    <div class="recipe-card" onclick="openRecipe('birria')" data-cat="slow comfort soups">
+      <div class="card-thumb"><div class="card-thumb-inner">🍲</div></div>
+      <p class="card-label">Comfort · Mexican</p>
+      <h3 class="card-title">Birria de Res at 2am</h3>
+      <p class="card-desc">The broth that costs you a day and repays you for a week.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 4–6 hrs &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.9</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+    <div class="recipe-card" onclick="openRecipe('dosa')" data-cat="street fermented vegetarian">
+      <div class="card-thumb"><div class="card-thumb-inner">🫓</div></div>
+      <p class="card-label">Street · South Indian</p>
+      <h3 class="card-title">Masala Dosa, No Shortcuts</h3>
+      <p class="card-desc">Fermented batter. Paper-thin. The patience the modern world forgot.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 24 hrs &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.8</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+    <div class="recipe-card" data-cat="slow soups comfort">
+      <div class="card-thumb"><div class="card-thumb-inner">🫕</div></div>
+      <p class="card-label">Comfort · Korean</p>
+      <h3 class="card-title">Seolleongtang at 4am</h3>
+      <p class="card-desc">Ox bone broth, white as fog. Twelve hours minimum. Non-negotiable.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 12 hrs &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 5.0</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+    <div class="recipe-card" data-cat="slow comfort">
+      <div class="card-thumb"><div class="card-thumb-inner">🥩</div></div>
+      <p class="card-label">Comfort · Southern US</p>
+      <h3 class="card-title">Oxtail Stew, the Long Way</h3>
+      <p class="card-desc">If you're in a hurry, make something else. If you're not, make this.</p>
+      <div class="card-footer">
+        <span class="card-time">⏱ 5 hrs &nbsp;·&nbsp; <span class="stars" style="font-size:.5rem">★★★★★</span> 4.9</span>
+        <button class="save-btn" onclick="toggleSave(event,this)">♡ Save</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /homePage -->
+
+<!-- ═══ RECIPE PAGES ═══ -->
+
+<!-- BIRRIA -->
+<div class="recipe-page" id="rp-birria">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🍲</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">001 · Comfort · Mexican · Jalisco</p>
+      <h1 class="rp-title">Birria de Res<br>at 2am</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★★</span><span class="stars-count">4.9 (2,341 made this)</span></p>
+      <p class="rp-intro">There is a particular kind of hunger that only arrives after midnight. This recipe exists for that hunger — the one that asks for something warm, slow, and deeply built. Birria is not a recipe. It is a decision to take something seriously.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">4–6 hours</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">45 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">6</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Intermediate</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <p class="ing-group-title">The meat</p>
+      <div class="ing-item"><span>Chuck roast, bone-in</span><span class="ing-qty">1.5 kg</span></div>
+      <div class="ing-item"><span>Short rib or oxtail</span><span class="ing-qty">500 g</span></div>
+      <p class="ing-group-title">The chile paste</p>
+      <div class="ing-item"><span>Guajillo chiles, dried</span><span class="ing-qty">6</span></div>
+      <div class="ing-item"><span>Ancho chiles, dried</span><span class="ing-qty">3</span></div>
+      <div class="ing-item"><span>Pasilla chiles, dried</span><span class="ing-qty">2</span></div>
+      <div class="ing-item"><span>Roma tomatoes</span><span class="ing-qty">4</span></div>
+      <div class="ing-item"><span>White onion</span><span class="ing-qty">1 large</span></div>
+      <div class="ing-item"><span>Garlic cloves</span><span class="ing-qty">8</span></div>
+      <div class="ing-item"><span>Mexican cinnamon</span><span class="ing-qty">1 stick</span></div>
+      <div class="ing-item"><span>Black peppercorns</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Cumin seeds</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Dried oregano</span><span class="ing-qty">1 tbsp</span></div>
+      <div class="ing-item"><span>Apple cider vinegar</span><span class="ing-qty">2 tbsp</span></div>
+      <p class="ing-group-title">The braise</p>
+      <div class="ing-item"><span>Beef stock</span><span class="ing-qty">2 L</span></div>
+      <div class="ing-item"><span>Bay leaves</span><span class="ing-qty">3</span></div>
+      <p class="ing-group-title">To serve</p>
+      <div class="ing-item"><span>Corn tortillas</span><span class="ing-qty">12</span></div>
+      <div class="ing-item"><span>White onion, diced</span><span class="ing-qty">½</span></div>
+      <div class="ing-item"><span>Cilantro, chopped</span><span class="ing-qty">large handful</span></div>
+      <div class="ing-item"><span>Lime wedges</span><span class="ing-qty">3</span></div>
+      <div class="ing-item"><span>Oaxacan cheese</span><span class="ing-qty">200 g</span></div>
+      <p class="ing-yield">6 large servings. Broth keeps 5 days refrigerated.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">The first time I had birria was from a man who wouldn't tell me his name. He had a cart. He was there every Saturday, positioned between a laundromat and a tire shop, and his consommé was the color of old mahogany.<br><br><strong>Then one Saturday, he wasn't there.</strong> I spent three years trying to reconstruct what he made. This version is not his. It never will be. That's the nature of ghost food.</p>
+      <h2 class="rp-blog-h">The broth is everything</h2>
+      <p class="rp-blog-p">Birria's soul lives in its consommé. The dried chiles — guajillo, ancho, pasilla — each contribute layers: one gives fruit, one gives smoke, one gives that deep purple color that stains everything it touches, including your memory of it.</p>
+      <p class="rp-blog-p">Toast them dry in a heavy pan. Don't rush this. You want them to wake up, not burn. A chile that smells like coffee and dark chocolate is a chile ready to work.</p>
+      <blockquote>"The consommé should taste like something has been happening in that pot for a very long time. Because it has."</blockquote>
+      <h2 class="rp-blog-h">On the meat</h2>
+      <p class="rp-blog-p">Chuck roast, oxtail, short rib — use what speaks to you. The rule is collagen. When the broth cools, it should tremble. That's how you know it worked. Marinate overnight in the chile paste. The next morning, your kitchen will smell like something important is about to happen.</p>
+      <p class="steps-label">Method</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Toast chiles in a dry pan, pressing flat, until darkened and fragrant — about 30 seconds per side. Remove stems and seeds. Soak in 2 cups hot water for 20 minutes.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Char the tomatoes, onion, and garlic directly over a gas flame or under a broiler until blackened in spots.</p></div>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Blend soaked chiles (with soaking liquid), charred vegetables, and all spices with the vinegar until very smooth. Strain through a sieve.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">Coat the beef completely in the chile paste. Cover and refrigerate overnight, minimum 4 hours.</p></div>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Sear the marinated beef in a heavy pot over high heat until every surface is deeply browned. Work in batches — don't crowd the pot.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Add stock, bay leaves, and remaining paste. Bring to a boil, reduce to the lowest simmer, cover, and braise 3–4 hours until meat falls from bone.</p></div>
+      <div class="step"><span class="step-n">07</span><p class="step-t">Remove meat and shred. Skim the fat from the broth surface — reserve this fat for dipping the tortillas.</p></div>
+      <div class="step"><span class="step-n">08</span><p class="step-t">For quesabirria: dip tortilla in reserved fat, press onto a hot griddle, add meat and cheese, fold, cook until crisp and red. Dip every bite back into the hot consommé.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ELOTE -->
+<div class="recipe-page" id="rp-elote">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🌽</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">002 · Street Food · Mexican · Mexico City</p>
+      <h1 class="rp-title">Elote en Vaso</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★★</span><span class="stars-count">4.7 (1,822 made this)</span></p>
+      <p class="rp-intro">You don't sit down for elote en vaso. You take it from the vendor's hand, find a wall to lean against, and eat while watching the street happen around you. This is that experience, bottled.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">15 minutes</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">15 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">1</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Easy</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <div class="ing-item"><span>Corn kernels (2 cobs or frozen)</span><span class="ing-qty">250 g</span></div>
+      <div class="ing-item"><span>Butter</span><span class="ing-qty">1 tbsp</span></div>
+      <div class="ing-item"><span>Mayonnaise</span><span class="ing-qty">2 tbsp</span></div>
+      <div class="ing-item"><span>Crema mexicana</span><span class="ing-qty">2 tbsp</span></div>
+      <div class="ing-item"><span>Cotija cheese, crumbled</span><span class="ing-qty">30 g</span></div>
+      <div class="ing-item"><span>Tajín or chile-lime powder</span><span class="ing-qty">to taste</span></div>
+      <div class="ing-item"><span>Lime</span><span class="ing-qty">1</span></div>
+      <div class="ing-item"><span>Salt</span><span class="ing-qty">pinch</span></div>
+      <p class="ing-yield">Serves 1. Scale freely.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">The genius of elote en vaso is that it takes something primitive — boiled corn — and layers it with opposing textures and temperatures until it becomes something unreasonable.<br><br><strong>The corn should be hot. The crema should be cold.</strong> The chile should burn slightly. The lime should cut through all of it.</p>
+      <blockquote>"Street food is not about technique. It is about the right things in the right order, unapologetically."</blockquote>
+      <p class="steps-label">Method</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Cook corn in boiling salted water 5 minutes, or sauté in butter over high heat until edges caramelize — this gives better texture and more flavor.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Spoon the hot corn into a cup or deep bowl.</p></div>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Add the mayonnaise and crema. Stir gently until the corn is coated.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">Top with crumbled cotija — not grated. Crumbled gives pockets of salt.</p></div>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Dust generously with Tajín. Generously means more than you're comfortable with.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Squeeze the lime over everything. Eat immediately, standing if possible.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONGEE -->
+<div class="recipe-page" id="rp-congee">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🍚</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">003 · Comfort · Cantonese · Guangdong</p>
+      <h1 class="rp-title">Congee for the Sick and the Sad</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★★</span><span class="stars-count">4.8 (3,107 made this)</span></p>
+      <p class="rp-intro">In Cantonese households, congee is the answer to most questions. Flu? Congee. Breakup? Congee. Can't sleep and the world feels wrong at 3am? There is a pot on the stove. It has been there for you, all along.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">2 hours</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">20 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">2–3</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Easy</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <div class="ing-item"><span>Jasmine rice</span><span class="ing-qty">200 g</span></div>
+      <div class="ing-item"><span>Chicken or pork stock</span><span class="ing-qty">2 L</span></div>
+      <div class="ing-item"><span>Fresh ginger, sliced</span><span class="ing-qty">4–5 coins</span></div>
+      <div class="ing-item"><span>Garlic cloves, crushed</span><span class="ing-qty">2</span></div>
+      <div class="ing-item"><span>Sesame oil</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Soy sauce</span><span class="ing-qty">to taste</span></div>
+      <div class="ing-item"><span>White pepper</span><span class="ing-qty">pinch</span></div>
+      <p class="ing-group-title">To garnish (choose)</p>
+      <div class="ing-item"><span>Spring onion, sliced</span><span class="ing-qty">2 stalks</span></div>
+      <div class="ing-item"><span>Century egg, sliced</span><span class="ing-qty">1</span></div>
+      <div class="ing-item"><span>Fried shallots</span><span class="ing-qty">handful</span></div>
+      <p class="ing-yield">Serves 2–3. Add water when reheating.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">Congee is rice that has given up its form entirely — surrendered to water and heat until it becomes something ancient and gentle and soft.<br><br><strong>The ratio is 1:10.</strong> One cup of rice to ten cups of stock. You will doubt this. By the end, the rice will have dissolved into the liquid, becoming something that is neither rice nor soup but its own category.</p>
+      <blockquote>"My grandmother never measured. She just knew when it was ready — when the spoon drew a slow wave across the surface that closed behind itself."</blockquote>
+      <p class="steps-label">Method</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Rinse the rice once under cold water. Don't over-rinse — you want some starch. That starch makes congee silky rather than watery.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Bring the stock to a boil with the ginger and crushed garlic. Add the rinsed rice and stir once.</p></div>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Reduce to the very lowest simmer your stove can manage. Cover with the lid slightly ajar. Cook 60–90 minutes, stirring every 15 minutes.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">The congee is ready when the rice has dissolved completely and the texture is uniform, thick, and slides slowly off a spoon.</p></div>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Season with soy sauce and white pepper. Finish with a drizzle of sesame oil.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Ladle into deep bowls. Top with chosen garnishes. Eat slowly, preferably in silence.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- BÁNH MÌ -->
+<div class="recipe-page" id="rp-banh-mi">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🥖</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">004 · Street Food · Vietnamese · Saigon</p>
+      <h1 class="rp-title">Bánh Mì at the Cart on Fifth</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★☆</span><span class="stars-count">4.6 (987 made this)</span></p>
+      <p class="rp-intro">Some recipes are recipes. Some are eulogies. This is both. The cart on Fifth Street disappeared one Tuesday in November. What remained: a baguette with impossible crunch, a pâté of two continents, and a woman who never wrote anything down.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">30 min + overnight</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">30 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">2</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Easy</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <p class="ing-group-title">The pickle (night before)</p>
+      <div class="ing-item"><span>Daikon, julienned</span><span class="ing-qty">100 g</span></div>
+      <div class="ing-item"><span>Carrot, julienned</span><span class="ing-qty">100 g</span></div>
+      <div class="ing-item"><span>Rice vinegar</span><span class="ing-qty">100 ml</span></div>
+      <div class="ing-item"><span>White sugar</span><span class="ing-qty">2 tbsp</span></div>
+      <div class="ing-item"><span>Fine salt</span><span class="ing-qty">1 tsp</span></div>
+      <p class="ing-group-title">The sandwich</p>
+      <div class="ing-item"><span>French demi-baguette</span><span class="ing-qty">1 per person</span></div>
+      <div class="ing-item"><span>Pork liver pâté</span><span class="ing-qty">60 g</span></div>
+      <div class="ing-item"><span>Char siu pork, sliced</span><span class="ing-qty">100 g</span></div>
+      <div class="ing-item"><span>Cucumber, thin sliced</span><span class="ing-qty">½</span></div>
+      <div class="ing-item"><span>Jalapeño rings</span><span class="ing-qty">4–6</span></div>
+      <div class="ing-item"><span>Fresh cilantro</span><span class="ing-qty">large handful</span></div>
+      <div class="ing-item"><span>Mayonnaise</span><span class="ing-qty">1 tbsp</span></div>
+      <div class="ing-item"><span>Maggi seasoning</span><span class="ing-qty">a drizzle</span></div>
+      <p class="ing-yield">Serves 2. Pickle keeps 2 weeks refrigerated.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">The genius of bánh mì is that it is a French baguette that has been entirely taken over by Vietnam and refuses to give it back.<br><br><strong>She made these for thirty years.</strong> I watched her for one. This is what I remember.</p>
+      <blockquote>"The bread must shatter when you bite it. If it doesn't shatter, it's not ready."</blockquote>
+      <p class="steps-label">Method</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Night before: dissolve sugar and salt in warm rice vinegar and enough water to cover. Submerge julienned daikon and carrot. Refrigerate overnight — they should taste sharp enough to make you flinch.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Toast the baguette in a hot oven at 200°C for 5 minutes. It should crack audibly when pressed.</p></div>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Slice open but not all the way through. Spread the inside with mayonnaise, then a heavy layer of pâté.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">Layer in char siu, drained pickled vegetables, then cucumber, then jalapeño.</p></div>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Pack in a serious amount of cilantro. This is not garnish — it is structural.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Drizzle with Maggi. Close. Eat immediately, over a sink. There is no dignified way to do this.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAC -->
+<div class="recipe-page" id="rp-mac">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🧀</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">005 · Comfort · Southern US</p>
+      <h1 class="rp-title">Baked Mac &amp; The Family Secret</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★★</span><span class="stars-count">4.9 (4,502 made this)</span></p>
+      <p class="rp-intro">This recipe does not appear in any cookbook. It existed only in the memory of one woman, passed in pieces to her children, never written down because she believed you had to earn a recipe by watching it made enough times. She was right.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">1 hour</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">20 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">8–10</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Easy</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <div class="ing-item"><span>Elbow macaroni</span><span class="ing-qty">500 g</span></div>
+      <div class="ing-item"><span>Sharp cheddar, grated</span><span class="ing-qty">300 g</span></div>
+      <div class="ing-item"><span>Gruyère, grated</span><span class="ing-qty">150 g</span></div>
+      <div class="ing-item"><span>American cheese</span><span class="ing-qty">2 slices</span></div>
+      <div class="ing-item"><span>Whole milk</span><span class="ing-qty">500 ml</span></div>
+      <div class="ing-item"><span>Evaporated milk</span><span class="ing-qty">1 can</span></div>
+      <div class="ing-item"><span>Eggs</span><span class="ing-qty">2 large</span></div>
+      <div class="ing-item"><span>Unsalted butter</span><span class="ing-qty">60 g</span></div>
+      <div class="ing-item"><span>Dry mustard powder</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Cayenne pepper</span><span class="ing-qty">¼ tsp</span></div>
+      <div class="ing-item"><span>Salt and white pepper</span><span class="ing-qty">to taste</span></div>
+      <p class="ing-yield">Serves 8–10. A dish for crowds, holidays, and grief.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">There are two kinds of macaroni and cheese. The kind from a packet, and the kind baked in a pan with a crust that crackles when you press it.<br><br><strong>This is the second kind.</strong> The secret is the egg. Two eggs whisked into the custard base give the whole thing structure. The mac should quiver when you cut into it.</p>
+      <blockquote>"She always said three cheeses minimum. She always used five."</blockquote>
+      <p class="steps-label">Method</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Cook macaroni in heavily salted water until just barely al dente — it continues cooking in the oven. Drain and toss immediately with the butter.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Whisk together eggs, whole milk, and evaporated milk with mustard powder, cayenne, salt, and white pepper.</p></div>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Combine buttered macaroni with two-thirds of the grated cheeses and the torn American cheese slices. Stir until cheese begins to melt into the hot pasta.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">Pour the egg-milk mixture over the pasta and stir gently. Pour into a buttered 9×13 baking dish.</p></div>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Top with remaining grated cheese. Bake at 175°C (350°F) for 35–40 minutes until top is golden and edges are bubbling.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Rest 10 minutes before serving. The custard needs to set. Resist.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- DOSA -->
+<div class="recipe-page" id="rp-dosa">
+  <button class="rp-back" onclick="goHome()">← Back to Ghost Recipes</button>
+  <div class="rp-hero">
+    <div class="rp-hero-img">🫓</div>
+    <div class="rp-hero-meta">
+      <p class="rp-label">006 · Street Food · South Indian · Karnataka</p>
+      <h1 class="rp-title">Masala Dosa, No Shortcuts</h1>
+      <p class="rp-byline">By the Ghost Kitchen Archive &nbsp;·&nbsp; <span class="stars">★★★★★</span><span class="stars-count">4.8 (1,430 made this)</span></p>
+      <p class="rp-intro">You cannot make a real dosa fast. The batter must ferment. The fermentation takes the night. The night is not optional. Any recipe that promises dosa in under an hour is lying to you about what dosa is.</p>
+    </div>
+  </div>
+  <div class="rp-stats">
+    <div class="rp-stat"><p class="rp-stat-label">Total Time</p><p class="rp-stat-val">24 hrs + 30 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Active Time</p><p class="rp-stat-val">30 min</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Serves</p><p class="rp-stat-val">4</p></div>
+    <div class="rp-stat"><p class="rp-stat-label">Difficulty</p><p class="rp-stat-val">Advanced</p></div>
+  </div>
+  <div class="rp-body">
+    <aside class="rp-ingredients">
+      <p class="rp-col-label">Ingredients</p>
+      <p class="ing-group-title">The batter (start night before)</p>
+      <div class="ing-item"><span>Parboiled rice</span><span class="ing-qty">300 g</span></div>
+      <div class="ing-item"><span>Urad dal (split)</span><span class="ing-qty">100 g</span></div>
+      <div class="ing-item"><span>Fenugreek seeds</span><span class="ing-qty">½ tsp</span></div>
+      <div class="ing-item"><span>Salt</span><span class="ing-qty">1½ tsp</span></div>
+      <p class="ing-group-title">The masala filling</p>
+      <div class="ing-item"><span>Potatoes, boiled</span><span class="ing-qty">4 medium</span></div>
+      <div class="ing-item"><span>Mustard seeds</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Curry leaves</span><span class="ing-qty">12</span></div>
+      <div class="ing-item"><span>Green chillies</span><span class="ing-qty">2</span></div>
+      <div class="ing-item"><span>Ginger, grated</span><span class="ing-qty">1 tsp</span></div>
+      <div class="ing-item"><span>Turmeric</span><span class="ing-qty">½ tsp</span></div>
+      <div class="ing-item"><span>White onion, thin sliced</span><span class="ing-qty">1</span></div>
+      <div class="ing-item"><span>Neutral oil or ghee</span><span class="ing-qty">2 tbsp</span></div>
+      <p class="ing-yield">Makes 8–10 dosas. Batter improves on day 2.</p>
+    </aside>
+    <div class="rp-steps">
+      <p class="rp-blog-intro">Dosa is what happens when you trust time and live cultures to do the work that machines cannot. The fermentation is where the flavor lives.<br><br><strong>Grind with cold water only</strong> — the cold matters; heat kills the culture before it starts. In 18–24 hours the batter will have grown, bubbled, and become something that smells faintly sour and deeply alive.</p>
+      <blockquote>"The batter is ready when it smells like the street outside a tiffin shop at 7am."</blockquote>
+      <p class="steps-label">Method — the batter</p>
+      <div class="step"><span class="step-n">01</span><p class="step-t">Soak rice and urad dal separately in cold water for 6–8 hours. Soak the fenugreek seeds with the dal.</p></div>
+      <div class="step"><span class="step-n">02</span><p class="step-t">Drain and grind both separately with cold water until very smooth. Combine, add salt, mix well. Cover loosely and leave in a warm spot (28–32°C) for 18–24 hours. Refrigerate until needed.</p></div>
+      <p class="steps-label">Method — the masala</p>
+      <div class="step"><span class="step-n">03</span><p class="step-t">Heat oil in a pan. Add mustard seeds and cover — they will pop. Add curry leaves, chillies, and ginger. Sauté 30 seconds.</p></div>
+      <div class="step"><span class="step-n">04</span><p class="step-t">Add sliced onion and cook until soft and golden. Add turmeric. Add boiled potatoes, roughly crushed (not mashed). Season. Cook 2 minutes.</p></div>
+      <p class="steps-label">Method — cooking the dosa</p>
+      <div class="step"><span class="step-n">05</span><p class="step-t">Heat a flat cast-iron or non-stick pan over high heat until very hot. Reduce to medium-high. Pour a ladleful of batter in the center and spread in fast outward circles until paper-thin.</p></div>
+      <div class="step"><span class="step-n">06</span><p class="step-t">Drizzle oil around the edges. Cook until edges lift and bottom is golden and crisp — about 2 minutes. Spoon masala along the center, fold, serve immediately.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Ghost Recipes &nbsp;·&nbsp; No dining room required</span>
+  <span>Dispatches from the unseen kitchen &nbsp;·&nbsp; © 2025</span>
+</footer>
+
+<script>
+function goHome() {
+  document.getElementById('homePage').classList.add('active');
+  document.querySelectorAll('.recipe-page').forEach(p => p.classList.remove('visible'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openRecipe(id) {
+  document.getElementById('homePage').classList.remove('active');
+  document.querySelectorAll('.recipe-page').forEach(p => p.classList.remove('visible'));
+  const page = document.getElementById('rp-' + id);
+  if (page) { page.classList.add('visible'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function setCategory(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#mainGrid .recipe-card').forEach(card => {
+    const cats = card.dataset.cat || '';
+    card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+  });
+}
+
+function toggleSave(e, btn) {
+  e.stopPropagation();
+  const saved = btn.classList.toggle('saved');
+  btn.textContent = saved ? '♥ Saved' : '♡ Save';
+}
+
+function handleSearch(val) {
+  const v = val.toLowerCase();
+  if (v.includes('birria')) openRecipe('birria');
+  else if (v.includes('elote') || v.includes('corn')) openRecipe('elote');
+  else if (v.includes('congee')) openRecipe('congee');
+  else if (v.includes('banh') || v.includes('bnh')) openRecipe('banh-mi');
+  else if (v.includes('mac')) openRecipe('mac');
+  else if (v.includes('dosa')) openRecipe('dosa');
+}
+</script>
+</body>
+</html>
