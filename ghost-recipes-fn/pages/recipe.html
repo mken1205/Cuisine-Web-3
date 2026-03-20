@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe — Ghost Recipes</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <a class="logo-wrap" href="../index.html">
+      <span class="logo-ghost">Ghost</span>
+      <span class="logo-recipes">Recipes</span>
+    </a>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" placeholder="Search the archive…" id="searchInput">
+    </div>
+    <nav class="masthead-links">
+      <a href="../index.html">Home</a>
+      <a href="recipes.html">Collection</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- All content injected by recipe.js -->
+<div id="recipeRoot"></div>
+
+<footer>
+  <span>Ghost Recipes &nbsp;·&nbsp; No dining room required</span>
+  <span>Dispatches from the unseen kitchen &nbsp;·&nbsp; © 2025</span>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/recipe.js"></script>
+<script>
+  // Search from recipe page goes to collection
+  document.getElementById("searchInput").addEventListener("keydown", e => {
+    if (e.key === "Enter" && e.target.value.trim()) {
+      window.location = `recipes.html`;
+    }
+  });
+</script>
+</body>
+</html>
