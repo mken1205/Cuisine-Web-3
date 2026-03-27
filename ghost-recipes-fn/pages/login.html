@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Login — Ghost Recipes</title>
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style2.css">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
         <input class="form-input" type="password" id="passwordInput" placeholder="Enter admin password" autocomplete="current-password">
       </div>
       <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
-        Enter the Kitchen →
+        Login
       </button>
     </form>
 
@@ -39,21 +39,6 @@
 </div>
 
 <script src="../js/data.js"></script>
-<script>
-  // Redirect if already logged in
-  if (Store.isLoggedIn()) window.location = "admin.html";
-
-  document.getElementById("loginForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const pass = document.getElementById("passwordInput").value;
-    if (Store.login(pass)) {
-      window.location = "admin.html";
-    } else {
-      document.getElementById("loginError").classList.add("show");
-      document.getElementById("passwordInput").value = "";
-      document.getElementById("passwordInput").focus();
-    }
-  });
-</script>
+<script src="../js/login.js"></script>
 </body>
 </html>

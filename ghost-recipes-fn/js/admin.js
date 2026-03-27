@@ -2,7 +2,7 @@
    GHOST RECIPES — ADMIN PANEL (js/admin.js)
    Full CRUD: create, edit, delete recipes.
    Auth-gated via sessionStorage.
-   ═══════════════════════════════════════════════ 
+   ═══════════════════════════════════════════════ */
 
 let editingId = null; // null = create mode, string = edit mode
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLogout();
 });
 
-/* ── SIDEBAR NAVIGATION ── 
+/* ── SIDEBAR NAVIGATION ── */
 function setupSidebar() {
   document.querySelectorAll(".sidebar-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -39,7 +39,7 @@ function switchPanel(panelId) {
   if (btn) btn.classList.add("active");
 }
 
-/* ── DASHBOARD ── 
+/* ── DASHBOARD ── */
 function renderDashboard() {
   const recipes = Store.getRecipes();
   const totalMade = recipes.reduce((sum, r) => sum + (r.ratingCount || 0), 0);
@@ -65,7 +65,7 @@ function renderDashboard() {
   `).join("");
 }
 
-/* ── RECIPE LIST ── 
+/* ── RECIPE LIST ── */
 function renderRecipeList() {
   const recipes = Store.getRecipes();
   const tbody = document.getElementById("recipeListBody");
@@ -92,7 +92,7 @@ function viewRecipe(id) {
   window.open(`recipe.html?id=${id}`, "_blank");
 }
 
-/* ── DELETE ── 
+/* ── DELETE ── */
 function confirmDelete(id, title) {
   if (confirm(`Delete "${title}"? This cannot be undone.`)) {
     Store.deleteRecipe(id);
@@ -102,7 +102,7 @@ function confirmDelete(id, title) {
   }
 }
 
-/* ── FORM: CREATE / EDIT ── 
+/* ── FORM: CREATE / EDIT ── */
 function setupForm() {
   // Ingredient rows
   document.getElementById("addIngredientBtn").addEventListener("click", () => {
@@ -240,7 +240,7 @@ function saveRecipe() {
   switchPanel("list");
 }
 
-/* ── INGREDIENT ROWS ── 
+/* ── INGREDIENT ROWS ── */
 function addIngredientRow(name = "", qty = "") {
   const list = document.getElementById("ingredientList");
   const row = document.createElement("div");
@@ -264,7 +264,7 @@ function collectIngredients() {
   return [{ name: "", items }];
 }
 
-/* ── STEP ROWS ── 
+/* ── STEP ROWS ── */
 function addStepRow(text = "") {
   const list = document.getElementById("stepList");
   const idx = list.children.length + 1;
@@ -283,7 +283,7 @@ function collectSteps() {
     .filter(Boolean);
 }
 
-/* ── LOGOUT ── 
+/* ── LOGOUT ── */
 function setupLogout() {
   document.getElementById("logoutBtn").addEventListener("click", () => {
     Store.logout();
@@ -291,7 +291,7 @@ function setupLogout() {
   });
 }
 
-/* ── HELPERS ── 
+/* ── HELPERS ── */
 function getValue(id) { return (document.getElementById(id)?.value || ""); }
 function setValue(id, val) { const el = document.getElementById(id); if (el) el.value = val; }
 function esc(s) { return String(s).replace(/"/g, "&quot;"); }
@@ -308,7 +308,7 @@ function renderStars(rating) {
   return "★".repeat(full) + (half ? "☆" : "") + "☆".repeat(5 - full - (half ? 1 : 0));
 }
 
-/* ── TOAST ── 
+/* ── TOAST ── */
 function showToast(msg, type = "success") {
   const toast = document.getElementById("toast");
   toast.textContent = (type === "success" ? "✓  " : "✕  ") + msg;
@@ -316,4 +316,3 @@ function showToast(msg, type = "success") {
   setTimeout(() => toast.classList.remove("show"), 3000);
 }
 
-*/
