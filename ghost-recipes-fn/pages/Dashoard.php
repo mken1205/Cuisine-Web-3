@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+// Vérification de session : si l'utilisateur n'est pas connecté  renvoyer vers login
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    header("Location: ../login.php");
+    exit();
+}
+
+// Déconnexion si le bouton logout est cliqué
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +34,17 @@
     <nav class="masthead-links">
       <a href="../index.html">← View Site</a>
       <a href="recipes.html">Collection</a>
-      <button id="logoutBtn" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);cursor:pointer;background:none;border:none">Log Out</button>
+      <!-- Formulaire logout -->
+      <form method="POST" style="display:inline">
+        <button type="submit" name="logout" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);cursor:pointer;background:none;border:none">Log Out</button>
+      </form>
     </nav>
   </div>
 </header>
 
 <div class="admin-layout">
 
-  <!-- ── SIDEBAR ── -->
+  <!--SIDEBAR -->
   <aside class="admin-sidebar">
     <p class="admin-sidebar-label">Admin Panel</p>
     <button class="sidebar-btn active" data-panel="dashboard">
@@ -39,7 +58,7 @@
     </button>
   </aside>
 
-  <!-- ── MAIN ── -->
+  <!--MAIN-->
   <main class="admin-main">
 
     <!-- DASHBOARD -->
