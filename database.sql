@@ -1,6 +1,6 @@
--- ============================================
+
 -- Base de données : livret_recettes
--- ============================================
+
 CREATE DATABASE IF NOT EXISTS livret_recettes;
 USE livret_recettes;
 
@@ -18,7 +18,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE user (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     login    VARCHAR(50)  NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,          -- mot de passe hashé avec password_hash()
+    password VARCHAR(255) NOT NULL,          -- le mot de passesera  hashé avec password_hash()
     role     ENUM('admin','user') DEFAULT 'user'
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE recette (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     titre       VARCHAR(100) NOT NULL,
     description TEXT         NOT NULL,
-    photo       VARCHAR(255),                -- nom du fichier image (ex: tarte.jpg)
+    photo       VARCHAR(255),               
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -44,17 +44,17 @@ CREATE TABLE tag (
     nom VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Table de liaison recette <-> ingredient
+-- Table de liaison recette avec ingredient
 CREATE TABLE recette_ingredient (
     recette_id    INT         NOT NULL,
     ingredient_id INT         NOT NULL,
-    quantite      VARCHAR(50),              -- ex: "200g", "3 unités"
+    quantite      VARCHAR(50),              
     PRIMARY KEY (recette_id, ingredient_id),
     FOREIGN KEY (recette_id)    REFERENCES recette(id)    ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) ON DELETE RESTRICT
 );
 
--- Table de liaison recette <-> tag
+-- Table de liaison recette avec tag
 CREATE TABLE recette_tag (
     recette_id INT NOT NULL,
     tag_id     INT NOT NULL,
@@ -63,15 +63,13 @@ CREATE TABLE recette_tag (
     FOREIGN KEY (tag_id)     REFERENCES tag(id)     ON DELETE RESTRICT
 );
 
--- ============================================
+
 -- Données de test
--- ============================================
+
 
 -- Utilisateur admin (mot de passe: admin123)
 INSERT INTO user (login, password, role) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
--- Note: hash généré avec password_hash('admin123', PASSWORD_DEFAULT)
--- À changer en production !
+('admin', '$2y$10$.jywfsOjOB.eXpWygD5yeOR0W4T9AdP2V7vX89s9H6GEkI1SHx6a.', 'admin');
 
 -- Tags
 INSERT INTO tag (nom) VALUES

@@ -38,10 +38,8 @@ Accès : `http://localhost/cuisine/`
 - Login : `admin`
 - Mot de passe : `admin123`
 
-> ⚠️ **À changer en production !**
-> Le hash dans `database.sql` est généré avec `password_hash('admin123', PASSWORD_DEFAULT)`.
 
----
+
 
 ## Structure du projet
 
