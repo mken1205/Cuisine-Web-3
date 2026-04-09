@@ -12,7 +12,10 @@ $emojis = ['🍕', '🥗', '🍰', '🍜', '🥘', '🍳', '🫕', '🥧'];
 
 // Header
 ?>
-<?php require_once "includes/header.php"; ?>
+<?php
+$showSearchBar = false;
+require_once "includes/header.php";
+?>
 
 <!-- Partie 01 : accueillir l’utilisateu et le formulaire de recherche sur une recette-->
 <section class="hero">
@@ -30,19 +33,16 @@ $emojis = ['🍕', '🥗', '🍰', '🍜', '🥘', '🍳', '🫕', '🥧'];
 <!-- Partie 02 : Affichage des cartes de recettes -->
 
 <div class="section-head">
-    <h2 class="section-title">Toutes les recettes</h2>
+    <h2 class="section-title">À la une</h2>
     <a href="recherche.php" class="section-link">Voir tout →</a>
 </div>
 
-<div class="card-grid">
+<div class="card-grid-index">
     <?php if (empty($recettes)): ?>              <!-- je verifie si y'a pas de recettes %-->
         <div class="empty-state">Aucune recette pour l'instant.</div>
     <?php else: ?>
         <!--Ici on affiche les 4 premieres recettes -->
-        <?php 
-            //php foreach ($recettes as $i => $r):
-            foreach (array_slice($recettes, 0, 4) as $i => $r):  
-            ?>
+        <?php foreach (array_slice($recettes, 0, 4) as $i => $r): ?>
             <?php $tags = Tag::getByRecette($pdo, $r['id']); ?>  
             <a href="recette.php?id=<?= $r['id'] ?>" class="recipe-card">
 

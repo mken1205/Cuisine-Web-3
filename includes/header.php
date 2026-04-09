@@ -34,13 +34,14 @@ if (strpos($script, '/admin/') !== false) {           // j'utilise strpos pour c
             <span class="logo-ghost">Ghost</span>
             <span class="logo-recipes">Recipes</span>
         </a>
-
         <!-- pour la barre de recherche on doit l'envoyer comme formulaire vers la bonne page peu importe où on est grace a base sinon erreur : fichie n'existe pas-->
+        <!--Nous cachons la barre sur une certaine page pour eviter les doublons-->
+        <?php if (!isset($showSearchBar) || $showSearchBar): ?>
         <form class="search-wrap" method="GET" action="<?= $base ?>recherche.php">
             <span class="search-icon"></span>
             <input type="text" name="q" placeholder="Rechercher une recette..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
         </form>
-
+        <?php endif; ?>
         <nav class="masthead-links">
             <a href="<?= $base ?>index.php">Accueil</a>
             <a href="<?= $base ?>recherche.php">Recettes</a>

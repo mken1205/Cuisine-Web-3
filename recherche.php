@@ -60,7 +60,7 @@ $emojis    = ['🍕', '🥗', '🍰', '🍜', '🥘', '🍳', '🫕', '🥧'];
     </div>
 
     <!-- Grille de résultats -->
-    <div class="card-grid-3">
+    <div class="card-grid">
         <?php if (empty($recettes)): ?>
             <div class="empty-state">Aucune recette ne correspond à votre recherche.</div>
         <?php else: ?>
