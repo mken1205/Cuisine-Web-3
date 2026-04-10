@@ -20,7 +20,7 @@ require_once "includes/header.php";
 <!-- Partie 01 : accueillir l’utilisateu et le formulaire de recherche sur une recette-->
 <section class="hero">
     <h1 class="hero-title">Bienvenue sur <em>Ghost Recipes</em></h1>
-    <p class="hero-sub"> Un petit coin gourmand pour explorer, tester et savourer des recettes qui vous font sourire !</p>
+    <p class="hero-sub"> Des recettes tellement simples qu’on croirait qu’il n’y a pas de chef.</p>
 
     <form class="hero-search" method="GET" action="recherche.php">
         <input type="text" name="q" placeholder="Chercher une recette...">
@@ -76,4 +76,5 @@ require_once "includes/header.php";
 </div>
 
  <!-- Footer-->
+<script src="public/js/index.js"></script>
 <?php require_once "includes/footer.php"; ?>

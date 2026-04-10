@@ -77,5 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
+<script src="public/js/login.js"></script>
 </body>
 </html>

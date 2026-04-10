@@ -70,9 +70,10 @@ $emoji  = $emojis[$id % count($emojis)];
     <!-- Colonne préparation -->
     <div class="rp-steps">
         <h2 class="rp-steps-title">Préparation</h2>
-        <p class="rp-description"><?= nl2br(htmlspecialchars($recette['description'])) ?></p>
+        <div class="rp-description"><?= nl2br(htmlspecialchars($recette['description'])) ?></div>
     </div>
 
 </div>
 
+<script src="public/js/recette.js"></script>
 <?php require_once "includes/footer.php"; ?>

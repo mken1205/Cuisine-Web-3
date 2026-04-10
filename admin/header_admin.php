@@ -30,22 +30,22 @@
 <aside class="admin-sidebar">
     <span class="sidebar-label">Administration</span>
     <a href="dashboard.php"           class="sidebar-link <?= basename($_SERVER['PHP_SELF']) === 'dashboard.php'           ? 'active' : '' ?>">
-        <span class="sidebar-icon">📊</span> Dashboard
+        Dashboard
     </a>
     <a href="add_recette.php"         class="sidebar-link <?= basename($_SERVER['PHP_SELF']) === 'add_recette.php'         ? 'active' : '' ?>">
-        <span class="sidebar-icon">➕</span> Ajouter recette
+        Ajouter recette
     </a>
     <a href="list_recettes.php"       class="sidebar-link <?= basename($_SERVER['PHP_SELF']) === 'list_recettes.php'       ? 'active' : '' ?>">
-        <span class="sidebar-icon">📋</span> Gérer recettes
+        Gérer recettes
     </a>
     <a href="manage_ingredients.php"  class="sidebar-link <?= basename($_SERVER['PHP_SELF']) === 'manage_ingredients.php'  ? 'active' : '' ?>">
-        <span class="sidebar-icon">🥕</span> Ingrédients
+        Ingrédients
     </a>
     <a href="manage_tags.php"         class="sidebar-link <?= basename($_SERVER['PHP_SELF']) === 'manage_tags.php'         ? 'active' : '' ?>">
-        <span class="sidebar-icon">🏷️</span> Tags
+        Tags
     </a>
     <a href="../logout.php" class="sidebar-logout">
-        <span class="sidebar-icon">🚪</span> Se déconnecter
+        Se déconnecter
     </a>
 </aside>
 

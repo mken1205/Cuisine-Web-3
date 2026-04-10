@@ -31,6 +31,7 @@ if ($tag_id > 0) {
 $tous_tags = Tag::getAll($pdo);
 $emojis    = ['🍕', '🥗', '🍰', '🍜', '🥘', '🍳', '🫕', '🥧'];
 ?>
+<script src="public/js/recherche.js"></script>
 <?php require_once "includes/header.php"; ?>
 
 <div class="recherche-wrap">
@@ -91,5 +92,5 @@ $emojis    = ['🍕', '🥗', '🍰', '🍜', '🥘', '🍳', '🫕', '🥧'];
     </div>
 
 </div>
-
+<script src="public/js/recherche.js"></script>
 <?php require_once "includes/footer.php"; ?>

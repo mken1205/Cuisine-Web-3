@@ -2,6 +2,12 @@
 
 Projet PHP/MySQL — 2ème année Informatique
 
+## Auteurs
+
+- Samy Cherief
+- Hamidou Younoussa Amal
+- Ken Emmanuel Mumararungu Mugisha
+
 ---
 
 ## Installation
