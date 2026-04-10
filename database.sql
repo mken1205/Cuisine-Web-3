@@ -1,4 +1,3 @@
-
 -- Base de données : livret_recettes
 
 CREATE DATABASE IF NOT EXISTS livret_recettes;
@@ -80,33 +79,44 @@ INSERT INTO tag (nom) VALUES
 INSERT INTO ingredient (nom) VALUES
 ('Farine'), ('Oeuf'), ('Beurre'), ('Sucre'), ('Pomme'),
 ('Lait'), ('Sel'), ('Poivre'), ('Tomate'), ('Mozzarella'),
-('Lardon'), ('Crème fraîche'), ('Chocolat'), ('Levure');
+('Lardon'), ('Crème fraîche'), ('Chocolat'), ('Levure'),
+('Pomme de terre'),('Ail'),('Gruyère');   
 
 -- Recettes
 INSERT INTO recette (titre, description, photo) VALUES
 ('Tarte aux pommes',
  'Préchauffer le four à 180°C. Étaler la pâte dans un moule. Éplucher et couper les pommes en lamelles. Les disposer sur la pâte. Saupoudrer de sucre. Enfourner 35 minutes jusqu''à ce que la tarte soit dorée.',
- NULL),
+ 'tarte_au_pommes.jpg'),
 ('Quiche lorraine',
  'Préchauffer le four à 200°C. Étaler la pâte dans un moule. Mélanger les oeufs, la crème fraîche et les lardons dans un bol. Saler et poivrer. Verser le mélange sur la pâte. Enfourner 30 minutes.',
- NULL),
+ 'quiche_lorraine.jpg'),
 ('Pizza margherita',
  'Mélanger farine, levure, sel et eau tiède. Pétrir 10 minutes puis laisser reposer 1h. Étaler la pâte, garnir de coulis de tomate et de mozzarella. Cuire au four à 220°C pendant 15 minutes.',
- NULL),
+ 'pizza_margherita.jpg'),
 ('Mousse au chocolat',
  'Faire fondre le chocolat avec le beurre au bain-marie. Séparer les blancs des jaunes. Incorporer les jaunes au chocolat refroidi. Monter les blancs en neige ferme. Incorporer délicatement les blancs au chocolat. Réfrigérer 2h.',
- NULL);
+ 'mousse_au_chocolat.jpg'),
+('Gratin dauphinois',
+ 'Préchauffer le four à 180°C. Éplucher les pommes de terre et les couper en fines rondelles. Frotter un plat avec l''ail puis le beurrer. Disposer les pommes de terre en couches, saler et poivrer. Verser la crème par-dessus. Enfourner 1 heure.',
+ 'gratin-dauphinois.jpg'),
+('Crêpes maison',
+ 'Dans un saladier, verser la farine puis ajouter les œufs. Mélanger doucement en incorporant le lait petit à petit pour éviter les grumeaux. Ajouter une pincée de sel et un peu de beurre fondu. Laisser reposer la pâte 30 minutes. Faire cuire dans une poêle chaude légèrement beurrée. Retourner à mi-cuisson.',
+ 'crepes-maison.jpg');
 
 -- Liaisons recette - ingrédient
 INSERT INTO recette_ingredient (recette_id, ingredient_id, quantite) VALUES
 (1, 1, '200g'), (1, 2, '2'), (1, 3, '100g'), (1, 4, '50g'), (1, 5, '3'),
 (2, 1, '150g'), (2, 2, '3'), (2, 12, '20cl'), (2, 11, '200g'), (2, 7, '1 pincée'),
 (3, 1, '300g'), (3, 14, '1 sachet'), (3, 9, '2'), (3, 10, '125g'), (3, 7, '1 pincée'),
-(4, 13, '200g'), (4, 2, '4'), (4, 3, '50g'), (4, 4, '30g');
+(4, 13, '200g'), (4, 2, '4'), (4, 3, '50g'), (4, 4, '30g'),
+(5, 15, '1kg'), (5, 12, '50cl'), (5, 16, '2'),(5, 3, '30g'),(5, 7, '1 pincée'),(5, 8, '1 pincée'),
+(6, 1, '250g'), (6, 2, '3'),(6, 6, '50cl'),(6, 3, '30g'), (6, 7, '1 pincée');
 
 -- Liaisons recette - tag
 INSERT INTO recette_tag (recette_id, tag_id) VALUES
 (1, 1), (1, 6), (1, 7),   -- tarte: dessert, au four, hiver
 (2, 2), (2, 6), (2, 5),   -- quiche: entrée, au four, rapide
 (3, 3), (3, 6), (3, 4),   -- pizza: plat principal, au four, végétarien
-(4, 1), (4, 5);            -- mousse: dessert, rapide
+(4, 1), (4, 5),            -- mousse: dessert, rapide
+(5, 3), (5, 6),            -- gratin: plat principal, au four
+(6, 1), (6, 5);            -- crêpes: dessert, rapide
